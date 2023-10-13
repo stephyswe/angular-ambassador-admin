@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 
@@ -7,12 +8,15 @@ import { UserService } from '../../services/user.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   columns = ['ID', 'name', 'email', 'actions']
   dataSource = new MatTableDataSource()
+  @ViewChild(MatPaginator) paginator!: MatPaginator
+
+
 
   constructor(private userService: UserService) {}
-
+  
   ngOnInit(): void {
     this.userService.all().subscribe(
       users => {
@@ -21,5 +25,7 @@ export class UsersComponent implements OnInit {
     )
   }
 
-
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator
+  }
 }
