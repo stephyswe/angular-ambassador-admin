@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { ProductService } from '../../../services/product.service';
 
 @Component({
@@ -11,11 +12,14 @@ import { ProductService } from '../../../services/product.service';
 export class ProductsFormComponent implements OnInit {
 
   form!: FormGroup
+  create!: boolean
+  id!: number
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) {}
 
 
@@ -26,10 +30,28 @@ export class ProductsFormComponent implements OnInit {
       image: "",
       price: ""
     })
+
+    this.create = this.route.snapshot.data["create"]
+
+    if (!this.create) {
+      this.id =  this.route.snapshot.params["id"]
+
+      this.productService.get(this.id).subscribe(
+        product => {
+          this.form.patchValue(product)
+        }
+      )
+
+    }
+    console.log(this.create)
+
+
   }
 
   submit(): void {
-    this.productService.create(this.form.getRawValue())
-      .subscribe(() => this.router.navigate(["/products"]))
+    const method = this.create ? this.productService.create(this.form.getRawValue())
+    : this.productService.update(this.id, this.form.getRawValue());
+
+    method.subscribe(() => this.router.navigate(["/products"]))
   }
 }
