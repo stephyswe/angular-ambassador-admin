@@ -11,6 +11,7 @@ import { UsersComponent } from './secure/users/users.component';
 const routes: Routes = [
   {path: '', component: SecureComponent,
 children: [
+  {path: '', pathMatch:"full", redirectTo: "/users"},
   {path: 'profile', component: ProfileComponent},
   {path: 'users', component: UsersComponent},
 ]},
