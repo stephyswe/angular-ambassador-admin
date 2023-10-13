@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { Emitters } from '../../emitters/emitters';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class ProfileComponent implements OnInit {
       password_confirm: ''
     });
 
-    this.authService.user().subscribe(
+    Emitters.authEmitter.subscribe(
       user => {
         this.infoForm.patchValue(user)
       }
@@ -39,7 +40,9 @@ export class ProfileComponent implements OnInit {
 
   infoSubmit(): void {
     this.authService.updateInfo(this.infoForm.getRawValue()).subscribe(
-      user => console.log(user)
+      user => {
+        Emitters.authEmitter.emit(user)
+      }
     );
   }
 
