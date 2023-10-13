@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { NavComponent } from './nav/nav.component';
 import { SecureComponent } from './secure.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,11 +14,14 @@ import { SecureComponent } from './secure.component';
   declarations: [
     SecureComponent,
     NavComponent,
-    MenuComponent
+    MenuComponent,
+    ProfileComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class SecureModule { }
