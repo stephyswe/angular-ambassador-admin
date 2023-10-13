@@ -21,4 +21,10 @@ export class NavComponent implements OnInit {
       }
     )
   }
+
+  logout(): void {
+    this.authService.logout().subscribe(
+      res => console.log(res)
+    )
+  }
 }
