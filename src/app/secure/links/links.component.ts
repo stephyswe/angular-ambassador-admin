@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Order } from '../../interfaces/order';
 import { LinkService } from '../../services/link.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class LinksComponent implements OnInit {
     )
   }
 
-  sum(orders: any[]): number {
+  sum(orders: Order[]): number {
     return orders.reduce((s, o) => s + o.total, 0)
   }
 
