@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SecureComponent } from './secure.component';
 import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
 
 
 
@@ -22,7 +23,8 @@ import { UsersComponent } from './users/users.component';
     MenuComponent,
     ProfileComponent,
     UsersComponent,
-    LinksComponent
+    LinksComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,

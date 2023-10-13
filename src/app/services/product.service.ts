@@ -3,17 +3,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { User } from '../interfaces/user';
+import { Product } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  endpoint = `${environment.api}/ambassadors`
+export class ProductService {
+
+  endpoint = `${environment.api}/products`
 
   constructor( private http: HttpClient) {}
 
-  all(): Observable<User[]> {
-    return this.http.get<User[]>(this.endpoint)
+  all(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.endpoint)
   }
 }
